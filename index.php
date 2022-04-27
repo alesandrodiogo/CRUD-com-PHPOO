@@ -1,3 +1,6 @@
+<?php
+include './conexao.php';
+?>
 <!DOCTYPE html>
 <html lang="pt-pt">
 <head>
@@ -20,6 +23,28 @@
         <label for="curso">Curso</label>
         <input type="text" name="curso" placeholder="Biologia"><br><br>
         <input type="submit" value="Enviar" name="submit">
-    </form>
+    </form><br><br>
+    <hr>
+    <h2>Dados Cadastrados</h2><br>
+    <?php
+     
+    $connection = new Connection("localhost","root","","curso");
+
+    $sql = "SELECT * FROM aluno ORDER BY id";
+
+    $resultado = mysqli_query($connection->conn,$sql);
+
+    while($dados =mysqli_fetch_array($resultado)){
+        
+         echo "ID: ".$dados['id']."<br>";
+         echo "Nome: ".$dados['nome']."<br>";
+         echo "Data de Nascimento: ".$dados['data_nascimento']."<br>";
+         echo "Número de Matrícula: ".$dados['num_matricula']."<br>";
+         echo "Número de Estudante: ".$dados['num_estudante']."<br>";
+         echo "Curso: ".$dados['curso'];
+         echo"<hr>";
+    }
+    ?>
+
 </body>
 </html>
